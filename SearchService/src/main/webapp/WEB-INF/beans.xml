@@ -12,13 +12,13 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 
 <import resource="classpath:META-INF/cxf/cxf.xml"/>
 
-<!--
-<jaxws:endpoint id="messageGenService" 
-implementor="com.revature.ws.MessageGenImpl" 
-address="/greetingservice"/>
 
-<jaxws:endpoint id="testingService" 
-implementor="com.revature.ws.TestingGenImpl" 
-address="/testingservice"/>
--->
+<jaxws:endpoint id="hotelService" 
+implementor="com.revature.service.HotelServiceImpl" 
+address="/hotelservice"/>
+
+<jaxws:endpoint id="roomService" 
+implementor="com.revature.service.RoomServiceImpl" 
+address="/roomservice"/>
+
 </beans>
