@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -12,58 +13,52 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 @Component
 @Aspect
 public class LoggingAspect {
-	
-//	private Logger log;
-//	
-//	public Logger getLog() {
-//		return log;
-//	}
-//
-//	@Autowired
-//	public void setLog(Logger log) {
-//		this.log = log;
-//	}
-//
-//	@Pointcut("execution(public * com.revature.service.AuthServiceImpl.*(..))")
+
+	private Logger log;
+
+	@Autowired
+	public void setLog(Logger log) {
+		this.log = log;
+	}
+
+//	@Pointcut("execution(public * *(..))")
 //	public void pointcutForAllMethods() {
-//		//Hook - empty method to hold an annotation
-//	}
-//	
-//	/*
-//	 * @Before("execution(* com.revature.service.AuthServiceImpl.authenticateUser(..))"
-//	 * ) public void logBeforeAuthServiceMethods(JoinPoint jp) { String methodName =
-//	 * jp.getSignature().getName(); log.trace("Just called AuthService " +
-//	 * methodName + " Method"); }
-//	 */
-//	
-//	@Around("pointcutForAllMethods()")
-//	public Object loggingAllAdvice(ProceedingJoinPoint pjp) throws Throwable {
-//		
-//		log.trace("Method called: "+ pjp.getSignature().getClass() + "." + pjp.getSignature().getName());
-//		
-//		log.trace("Real class: " + pjp.getTarget().getClass());
-//		
-//		log.info("Parameters passed: " + Arrays.toString(pjp.getArgs()));
-//		
-//		Object returnObject = pjp.proceed();
-//
-//		log.trace("Value returned: " + returnObject);
-//		
-//		if (returnObject instanceof User) {
-//			User returnUser = (User)returnObject;
-//			returnUser.setPassword("*********");
-//			log.info("User password being hidden.");
-//			return returnUser;
-//		}
-//		
-//		return returnObject;
-//		
+//		//Hook - empty to hold an annotation
 //	}
 
-	
+	// @Before("pointcutForAllMethods()")
+	@Before("execution(public * com.revature.service.HotelServiceImpl.*(..))")
+	public void logBeforeAllHotelMethods(JoinPoint jp) {
+		String methodName = jp.getSignature().getName();
+		String argString = Arrays.toString(jp.getArgs());
+		// String returnedValues = jp.getSignature().toString();
+		log.info("Just called HotelService " + methodName + " Method. Parameters were passed " + argString);
+	}
+
+	@AfterReturning(pointcut = "execution(public * com.revature.service.HotelServiceImpl.*(..))", returning = "returnedValue")
+	public void logAfterAllHotelMethods(JoinPoint jp, Object returnedValue) {
+		String methodName = jp.getSignature().getName();
+		log.info("Returned value after calling HotelService " + methodName + ". Returned value: "
+				+ returnedValue.toString());
+	}
+
+	// @Before("pointcutForAllMethods()")
+	@Before("execution(public * com.revature.service.RoomServiceImpl.*(..))")
+	public void logBeforeAllRoomMethods(JoinPoint jp) {
+		String methodName = jp.getSignature().getName();
+		String argString = Arrays.toString(jp.getArgs());
+		// String returnedValues = jp.getSignature().toString();
+		log.info("Just called RoomService " + methodName + " Method. Parameters were passed " + argString);
+	}
+
+	@AfterReturning(pointcut = "execution(public * com.revature.service.RoomServiceImpl.*(..))", returning = "returnedValue")
+	public void logAfterAllRoomMethods(JoinPoint jp, Object returnedValue) {
+		String methodName = jp.getSignature().getName();
+		log.info("Returned value after calling RoomService " + methodName + ". Returned value: "
+				+ returnedValue.toString());
+	}
 	
 }

@@ -2,14 +2,17 @@ package com.revature.config;
 
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @ComponentScan("com.revature")
 @Configuration
+@EnableAspectJAutoProxy(proxyTargetClass = true) 
 public class AppConfig {
 
 	//DataSource info
@@ -42,6 +45,11 @@ public class AppConfig {
 			JdbcTemplate template = new JdbcTemplate();
 			template.setDataSource(dataSource);
 			return template;
+		}
+
+		@Bean
+		public Logger logger() {
+			return Logger.getRootLogger();
 		}
 	
 }
