@@ -2,15 +2,15 @@ package com.revature.service;
 
 import java.util.List;
 
-import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.dao.RoomDao;
 import com.revature.pojo.RoomType;
 
-@WebService(endpointInterface = "com.revature.service.RoomService",
-serviceName = "roomService")
+
+@Service
 public class RoomServiceImpl implements RoomService {
 
 	private RoomDao roomDao;

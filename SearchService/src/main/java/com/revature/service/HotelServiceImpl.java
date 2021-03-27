@@ -2,15 +2,14 @@ package com.revature.service;
 
 import java.util.List;
 
-import javax.jws.WebService;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.dao.HotelDao;
 import com.revature.pojo.Hotel;
 
-@WebService(endpointInterface = "com.revature.service.HotelService",
-serviceName = "hotelService")
+
+@Service
 public class HotelServiceImpl implements HotelService {
 
 	private HotelDao hotelDao;

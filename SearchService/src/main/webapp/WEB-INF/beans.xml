@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns:jaxws="http://cxf.apache.org/jaxws"
-xmlns:jaxrs="http://cxf.apache.org/jaxrs"
-xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
 http://cxf.apache.org/jaxrs
 http://cxf.apache.org/schemas/jaxrs.xsd
 http://cxf.apache.org/jaxws
 http://cxf.apache.org/schemas/jaxws.xsd">
 
-<import resource="classpath:META-INF/cxf/cxf.xml"/>
+	<context:annotation-config />
+
+	<bean class="com.revature.config.AppConfig" />
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
 
 
-<jaxws:endpoint id="hotelService" 
-implementor="com.revature.service.HotelServiceImpl" 
-address="/hotelservice"/>
+	<jaxws:endpoint id="hotelService"
+		implementor="com.revature.ws.HotelWSImpl" address="/hotelservice" />
 
-<jaxws:endpoint id="roomService" 
-implementor="com.revature.service.RoomServiceImpl" 
-address="/roomservice"/>
+	<jaxws:endpoint id="roomService"
+		implementor="com.revature.ws.RoomWSImpl" address="/roomservice" />
 
 </beans>
