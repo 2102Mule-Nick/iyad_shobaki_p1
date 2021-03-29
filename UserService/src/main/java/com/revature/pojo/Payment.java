@@ -11,6 +11,18 @@ public class Payment {
 	public Payment() {
 		super();
 	}
+	
+	
+
+	public Payment(String creditCardType, String creditCardNumber, String securityCode, int userId) {
+		super();
+		this.creditCardType = creditCardType;
+		this.creditCardNumber = creditCardNumber;
+		this.securityCode = securityCode;
+		this.userId = userId;
+	}
+
+
 
 	public Payment(int paymentId, String creditCardType, String creditCardNumber, String securityCode, int userId) {
 		super();

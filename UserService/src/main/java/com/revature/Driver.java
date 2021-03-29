@@ -7,6 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.revature.config.AppConfig;
 import com.revature.dto.UserPaymentInfo;
+import com.revature.pojo.User;
 import com.revature.service.UserService;
 import com.revature.service.UserServiceImpl;
 
@@ -18,8 +19,21 @@ public class Driver {
 		
 		UserService userService = applicationContext.getBean("userServiceImpl", UserServiceImpl.class);
 		
-		UserPaymentInfo paymentInfo = userService.getUserInfo("iyad@shobaki.com", "1234");
-		System.out.println(paymentInfo);
+		// Working fine
+//		UserPaymentInfo paymentInfo = userService.getUserInfo("iyad@shobaki.com", "1234");
+//		System.out.println(paymentInfo);
+//		
+		// Working fine
+//		String firstName = "Mike";
+//		String lastName = "Tyson";
+//		String phoneNumber = "(330) 6678899";
+//		String emailAddress = "mike@tyson.com";
+//		String password = "1234";
+//		User user = new User(firstName,lastName,phoneNumber,emailAddress,password);
+//		
+//		int userId = userService.registerNewUser(user);
+//		
+//		System.out.println(userId);
 		
 	}
 
