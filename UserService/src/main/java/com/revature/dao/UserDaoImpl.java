@@ -17,7 +17,7 @@ import com.revature.pojo.User;
 @Repository
 public class UserDaoImpl implements UserDao {
 
-	private JdbcTemplate jdbcTemplatec;
+	private JdbcTemplate jdbcTemplate;
 	
 	private UserPaymentInfoRowMapper userPaymentInfoRowMapper;
 
@@ -27,8 +27,8 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Autowired
-	public void setJdbcTemplatec(JdbcTemplate jdbcTemplatec) {
-		this.jdbcTemplatec = jdbcTemplatec;
+	public void setJdbcTemplatec(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
 				+ " inner join payment p on p.user_id = ua.user_id"
 				+ " where ua.email_address = ? and ua.user_password = ?";
 
-		return jdbcTemplatec.queryForObject(sql, userPaymentInfoRowMapper, emailAddres, password);
+		return jdbcTemplate.queryForObject(sql, userPaymentInfoRowMapper, emailAddres, password);
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class UserDaoImpl implements UserDao {
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		
-		jdbcTemplatec.update(connection -> {
+		jdbcTemplate.update(connection -> {
 			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, user.getFirstName());
 			ps.setString(2, user.getLastName());
@@ -75,7 +75,7 @@ public class UserDaoImpl implements UserDao {
 		Object[] args = new Object[] {paymentInfo.getCreditCardType(), paymentInfo.getCreditCardNumber(),
 				paymentInfo.getSecurityCode(), paymentInfo.getUserId()};
 		
-		if(jdbcTemplatec.update(sql, args) == 0) {
+		if(jdbcTemplate.update(sql, args) == 0) {
 			return false;
 		}
 		

@@ -3,6 +3,7 @@ package com.revature.test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.anything;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -15,6 +16,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -25,6 +28,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.SqlMergeMode;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.revature.dao.UserDaoImpl;
@@ -44,6 +48,11 @@ class UserDaoImplTest {
 	UserDaoImpl userDaoImpl;
 	@Autowired
 	UserPaymentInfoRowMapper mockUserPaymentInfoRowMapper;
+	
+	@Captor
+	ArgumentCaptor<Object[]> objetCaptured;
+	@Captor
+	ArgumentCaptor<int[]> intCaptured;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -100,9 +109,14 @@ class UserDaoImplTest {
 
 		User user = new User(firstName, lastName, phoneNumber, emailAddress, password);
 
-		int generatedId = 1;
+		//int generatedId = 1;
+		
 
-		KeyHolder keyHolder = new GeneratedKeyHolder();
+		//KeyHolder keyHolder = new GeneratedKeyHolder();
+		when(mockJdbcTemplate.update(sql, user)).thenReturn(1);
+
+	KeyHolder keyHolder = new GeneratedKeyHolder();
+		
 		when(mockJdbcTemplate.update(connection -> {
 			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, user.getFirstName());
@@ -111,31 +125,35 @@ class UserDaoImplTest {
 			ps.setString(4, user.getEmailAddress());
 			ps.setString(5, user.getPassword());
 			return ps;
-		}, keyHolder)).thenAnswer(new Answer() {
-			public Object answer(InvocationOnMock invocation) {
-				Object[] args = invocation.getArguments();
-				Map<String, Object> keyMap = new HashMap<String, Object>();
-				keyMap.put("user_id", generatedId);
-				((GeneratedKeyHolder) args[2]).getKeyList().add(keyMap);
-
-				return 1;
-			}
-		}).thenReturn(1);
+			
+		}, keyHolder)).thenReturn(1);
+		
+//		KeyHolder keyHolder = new GeneratedKeyHolder();
+//		when(mockJdbcTemplate.update(connection -> {
+//			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//			ps.setString(1, user.getFirstName());
+//			ps.setString(2, user.getLastName());
+//			ps.setString(3, user.getPhoneNumber());
+//			ps.setString(4, user.getEmailAddress());
+//			ps.setString(5, user.getPassword());
+//			return ps;
+//		}, keyHolder)).thenAnswer(new Answer() {
+//			public Object answer(InvocationOnMock invocation) {
+//				Object[] args = invocation.getArguments();
+//				Map<String, Object> keyMap = new HashMap<String, Object>();
+//				keyMap.put("", generatedId);
+//				((GeneratedKeyHolder) args[2]).getKeyList().add(keyMap);
+//
+//				return 1;
+//			}
+//		}).thenReturn(1);
 
 		int userIDReturn = userDaoImpl.registerNewUser(user);
 
-		KeyHolder keyHolder1 = new GeneratedKeyHolder();
-		verify(mockJdbcTemplate.update(connection -> {
-			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			ps.setString(1, user.getFirstName());
-			ps.setString(2, user.getLastName());
-			ps.setString(3, user.getPhoneNumber());
-			ps.setString(4, user.getEmailAddress());
-			ps.setString(5, user.getPassword());
-			return ps;
-		}, keyHolder1));
+		verify(mockJdbcTemplate.update(sql, user));
 
-		assertEquals(userIDReturn, 1);
+//		assertEquals(userIDReturn, 1);
+		assertTrue(userIDReturn == 1);
 
 	}
 

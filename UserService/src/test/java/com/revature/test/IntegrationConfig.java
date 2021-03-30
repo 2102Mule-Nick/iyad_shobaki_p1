@@ -21,7 +21,7 @@ public class IntegrationConfig {
 					"jdbc:postgresql://" + 
 					System.getenv("DB_URL") + 
 					":5432/" + 
-					System.getenv("USER_DB_NAME") +     // Change it to UserTest database -- IYAD 
+					System.getenv("USER_DB_TEST_NAME") +     // Change it to UserTest database -- IYAD 
 					"?";
 			public static final String DATASOURCE_DRIVERNAME = "org.postgresql.Driver";
 			public static final String DATASOURCE_USERNAME = System.getenv("DB_USERNAME");
