@@ -13,7 +13,12 @@ import com.revature.service.HotelServiceImpl;
 
 public class Driver {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
+		
+		//http://localhost:8080/SearchService/hotelservice?wsdl
+		//http://localhost:8080/SearchService/roomservice?wsdl
+		
 		
 		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
 		

@@ -19,6 +19,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mockito;
+import org.mockito.internal.matchers.Any;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,15 +109,9 @@ class UserDaoImplTest {
 		String password = "1234";
 
 		User user = new User(firstName, lastName, phoneNumber, emailAddress, password);
-
-		//int generatedId = 1;
 		
-
-		//KeyHolder keyHolder = new GeneratedKeyHolder();
-		when(mockJdbcTemplate.update(sql, user)).thenReturn(1);
-
-	KeyHolder keyHolder = new GeneratedKeyHolder();
-		
+//		KeyHolder keyHolder = new GeneratedKeyHolder();
+//		
 		when(mockJdbcTemplate.update(connection -> {
 			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, user.getFirstName());
@@ -126,34 +121,28 @@ class UserDaoImplTest {
 			ps.setString(5, user.getPassword());
 			return ps;
 			
-		}, keyHolder)).thenReturn(1);
-		
-//		KeyHolder keyHolder = new GeneratedKeyHolder();
-//		when(mockJdbcTemplate.update(connection -> {
-//			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//			ps.setString(1, user.getFirstName());
-//			ps.setString(2, user.getLastName());
-//			ps.setString(3, user.getPhoneNumber());
-//			ps.setString(4, user.getEmailAddress());
-//			ps.setString(5, user.getPassword());
-//			return ps;
-//		}, keyHolder)).thenAnswer(new Answer() {
-//			public Object answer(InvocationOnMock invocation) {
-//				Object[] args = invocation.getArguments();
-//				Map<String, Object> keyMap = new HashMap<String, Object>();
-//				keyMap.put("", generatedId);
-//				((GeneratedKeyHolder) args[2]).getKeyList().add(keyMap);
-//
-//				return 1;
-//			}
-//		}).thenReturn(1);
-
+		}, Mockito.any(GeneratedKeyHolder.class))).thenReturn(1);
+	
 		int userIDReturn = userDaoImpl.registerNewUser(user);
 
-		verify(mockJdbcTemplate.update(sql, user));
+		
+		//KeyHolder keyHolder1 = new GeneratedKeyHolder();
+		
+		verify(mockJdbcTemplate.update(connection -> {
+			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, user.getFirstName());
+			ps.setString(2, user.getLastName());
+			ps.setString(3, user.getPhoneNumber());
+			ps.setString(4, user.getEmailAddress());
+			ps.setString(5, user.getPassword());
+			return ps;
+			
+		}, Mockito.any(GeneratedKeyHolder.class)));
+		
+		//verify(mockJdbcTemplate.update(sql, user));
 
-//		assertEquals(userIDReturn, 1);
-		assertTrue(userIDReturn == 1);
+		assertEquals(userIDReturn, 1);
+		//assertTrue(userIDReturn == 1);
 
 	}
 
