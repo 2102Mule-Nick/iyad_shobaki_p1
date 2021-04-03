@@ -20,20 +20,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserPaymentInfo getUserInfo(String emailAddres, String password) {
-		// TODO - Add business logic
-		
 		return userDao.getUserInfo(emailAddres, password);
 	}
 
 	@Override
 	public int registerNewUser(User user) {
-		// TODO - Add business logic
 		return userDao.registerNewUser(user);
 	}
 
 	@Override
 	public boolean addPaymentInfo(Payment paymentInfo) {
-		// TODO - Add business logic
 		return userDao.addPaymentInfo(paymentInfo);
 	}
 

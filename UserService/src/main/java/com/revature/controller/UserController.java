@@ -44,7 +44,7 @@ public class UserController {
 		
 	}
 	
-	@PostMapping("/user-payment")
+	@PostMapping("/user/payment")
 	@ResponseBody
 	public String addUserPaymentInfo(@RequestBody Payment payment) {
 		
