@@ -17,6 +17,7 @@ public interface BookingService {
 	
 	public List<RoomType> getAllRoomTypes();
 	
-	public List<Integer> getAllAvailableRoomsByHotelAndType(int hotelId, int roomType, LocalDate checkInDate);
+	public List<Integer> getAllAvailableRoomsByHotelAndType(int hotelId, int roomType, 
+			LocalDate checkInDate, LocalDate checkOutDate);
 	
 }

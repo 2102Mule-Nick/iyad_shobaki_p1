@@ -35,7 +35,6 @@ public class UserController {
 	@ResponseBody
 	public String registerNewUser(@RequestBody User user) {
 		
-		
 		if(userService.registerNewUser(user) > 0) {
 			return "User register successfully!";
 		}

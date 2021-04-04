@@ -1,6 +1,7 @@
 package com.revature.service;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.dao.BookingDao;
+import com.revature.messaging.JmsMessageSender;
 import com.revature.pojo.Booking;
 import com.revature.ws.Hotel;
 import com.revature.ws.HotelWS;
@@ -29,6 +31,12 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public boolean bookRoom(Booking booking) {
+		
+		//Send Jms message with user payment info to PaymentService 
+		
+		
+		
+		
 		return bookingDao.bookRoom(booking);
 	}
 
@@ -66,7 +74,8 @@ public class BookingServiceImpl implements BookingService {
 
 
 	@Override
-	public List<Integer> getAllAvailableRoomsByHotelAndType(int hotelId, int roomType, LocalDate checkInDate) {
+	public List<Integer> getAllAvailableRoomsByHotelAndType(int hotelId, int roomType,
+			LocalDate checkInDate, LocalDate checkOutDate) {
 		RoomWSImplService roomWSImplService = new RoomWSImplService();
 		RoomWS roomPort = roomWSImplService.getRoomWSImplPort();
 		
@@ -75,8 +84,20 @@ public class BookingServiceImpl implements BookingService {
 		List<Booking> allBookedRoomsByHotel = bookingDao.getAllBookedRoomsByHotel(hotelId);
 		List<Integer> bookRoomsIds = new ArrayList<>();
 		
+		Period period = Period.between(checkInDate, checkOutDate);
+		//System.out.println(period.getDays());
+		
 		for(Booking booking : allBookedRoomsByHotel) {
-			if(checkInDate.isEqual(booking.getCheckIn()) || (checkInDate.isAfter(booking.getCheckIn()) && checkInDate.isBefore(booking.getCheckOut()))){
+			if(		((checkInDate.isEqual(booking.getCheckIn()) 
+					|| (checkInDate.isAfter(booking.getCheckIn())
+					&& checkInDate.isBefore(booking.getCheckOut()))))
+					|| ((checkOutDate.isEqual(booking.getCheckIn()) 
+					|| (checkOutDate.isAfter(booking.getCheckIn())
+					&& checkOutDate.isBefore(booking.getCheckOut())))) 
+					|| ((checkInDate.plusDays(period.getDays()/2).isEqual(booking.getCheckIn()) 
+					|| (checkInDate.plusDays(period.getDays()/2).isAfter(booking.getCheckIn())
+					&& checkInDate.plusDays(period.getDays()/2).isBefore(booking.getCheckOut())))) ){
+				
 				bookRoomsIds.add(booking.getRoomId());
 			}
 		}

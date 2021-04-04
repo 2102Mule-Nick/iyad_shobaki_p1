@@ -95,7 +95,7 @@ public class LoggingAspect {
 			log.warn(e.getMessage());
 		}
 		
-		log.info("Value returned: " + result);
+		log.info("Values returned successfully!" );//+ result);
 		
 		return result;
 	}
