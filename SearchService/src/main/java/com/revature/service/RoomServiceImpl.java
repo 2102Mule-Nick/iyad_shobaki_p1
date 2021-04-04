@@ -26,7 +26,7 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public List<String> getAllRoomsByHotelAndType(int hotelId, int roomType) {
+	public List<Integer> getAllRoomsByHotelAndType(int hotelId, int roomType) {
 		return roomDao.getAllRoomsByHotelAndType(hotelId, roomType);
 	}
 

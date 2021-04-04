@@ -53,7 +53,7 @@ public class AppConfig {
 
 			PoolingDataSource dataSource = new PoolingDataSource();
 			dataSource.setClassName(DATASOURCE_DRIVERNAME);
-			dataSource.setUniqueName("PostGresDB");
+			dataSource.setUniqueName("BookingPostGresDB");
 			dataSource.setMaxPoolSize(10);
 			dataSource.setAllowLocalTransactions(true);
 			dataSource.getDriverProperties().put("Url", DATASOURCE_URL);

@@ -42,12 +42,23 @@ public class RoomDaoImpl implements RoomDao {
 		return roomTypes;
 	}
 
+//	@Override
+//	public List<String> getAllRoomsByHotelAndType(int hotelId, int roomType) {
+//
+//		String sql = "select * from room where hotel_id = ? and room_type_id = ?";
+//
+//		List<String> roomsNumbers = jdbcTemplate.query(sql, roomNumberRowMapper, hotelId, roomType);
+//
+//		return roomsNumbers;
+//
+//	}
+//	
 	@Override
-	public List<String> getAllRoomsByHotelAndType(int hotelId, int roomType) {
+	public List<Integer> getAllRoomsByHotelAndType(int hotelId, int roomType) {
 
 		String sql = "select * from room where hotel_id = ? and room_type_id = ?";
 
-		List<String> roomsNumbers = jdbcTemplate.query(sql, roomNumberRowMapper, hotelId, roomType);
+		List<Integer> roomsNumbers = jdbcTemplate.query(sql, (rs,row) -> rs.getInt("room_id"), hotelId, roomType);
 
 		return roomsNumbers;
 

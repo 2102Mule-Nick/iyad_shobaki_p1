@@ -8,6 +8,6 @@ public interface RoomDao {
 	
 	List<RoomType> getAllRoomTypes();
 	
-	List<String> getAllRoomsByHotelAndType(int hotelId, int roomType);
+	List<Integer> getAllRoomsByHotelAndType(int hotelId, int roomType);
 	
 }

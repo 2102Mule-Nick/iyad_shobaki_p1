@@ -14,5 +14,5 @@ public interface RoomWS {
 	List<RoomType> getAllRoomTypes();
 
 	@WebMethod
-	List<String> getAllRoomsByHotelAndType(int hotelId, int roomType);
+	List<Integer> getAllRoomsByHotelAndType(int hotelId, int roomType);
 }

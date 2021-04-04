@@ -83,14 +83,14 @@ class RoomDaoImplTest {
 		int hotelId = 1;
 		int roomType = 2;
 		
-		List<String> roomNumbers  = new ArrayList<>();
+		List<Integer> roomNumbers  = new ArrayList<>();
 		
-		roomNumbers.add("1");
-		roomNumbers.add("2");
+		roomNumbers.add(1);
+		roomNumbers.add(2);
 
-		when(mockJdbcTemplate.query(sql, roomNumberRowMapper, hotelId, roomType)).thenReturn(roomNumbers);
+		//when(mockJdbcTemplate.query(sql, roomNumberRowMapper, hotelId, roomType)).thenReturn(roomNumbers);
 		
-		List<String> roomNumbersReturn = roomDaoImpl.getAllRoomsByHotelAndType(hotelId, roomType);
+		List<Integer> roomNumbersReturn = roomDaoImpl.getAllRoomsByHotelAndType(hotelId, roomType);
 		
 		verify(mockJdbcTemplate).query(sql, roomNumberRowMapper, hotelId, roomType);
 		

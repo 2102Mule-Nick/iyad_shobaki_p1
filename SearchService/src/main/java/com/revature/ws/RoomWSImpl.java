@@ -26,7 +26,7 @@ public class RoomWSImpl implements RoomWS {
 	}
 
 	@Override
-	public List<String> getAllRoomsByHotelAndType(int hotelId, int roomType) {
+	public List<Integer> getAllRoomsByHotelAndType(int hotelId, int roomType) {
 		return roomService.getAllRoomsByHotelAndType(hotelId, roomType);
 	}
 

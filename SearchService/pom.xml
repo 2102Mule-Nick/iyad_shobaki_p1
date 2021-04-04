@@ -28,13 +28,13 @@
 			<artifactId>cxf-rt-transports-http</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
-			<!-- https://mvnrepository.com/artifact/javax.jws/javax.jws-api -->
+		<!-- https://mvnrepository.com/artifact/javax.jws/javax.jws-api -->
 		<dependency>
 			<groupId>javax.jws</groupId>
 			<artifactId>javax.jws-api</artifactId>
 			<version>1.1</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -77,7 +77,7 @@
 			<artifactId>mockito-junit-jupiter</artifactId>
 			<version>3.8.0</version>
 		</dependency>
-				<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
@@ -94,6 +94,17 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
 			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.30</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.30</version>
 		</dependency>
 	</dependencies>
 	<build>
