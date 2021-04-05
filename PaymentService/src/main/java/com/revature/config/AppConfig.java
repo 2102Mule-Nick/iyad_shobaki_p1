@@ -19,7 +19,7 @@ import org.springframework.jms.connection.SingleConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
 
-//import com.revature.messaging.JmsMessageListener;
+import com.revature.messaging.JmsMessageListener;
 
 
 @Configuration
@@ -31,8 +31,8 @@ public class AppConfig {
 	public static final String BROKER_URL = "tcp://localhost:61616";
 	
 	public static final String PAYMENT_INFO_QUEUE = "PAYMENT_INFO_QUEUE";
-	public static final String PAYMENT_TEST_QUEUE = "PAYMENT_TEST_QUEUE";
-	public static final String PAYMENT_APPROVAL_TOPIC = "PAYMENT_APPROVAL_TOPIC";
+	//public static final String PAYMENT_TEST_QUEUE = "PAYMENT_TEST_QUEUE";
+	//public static final String PAYMENT_APPROVAL_TOPIC = "PAYMENT_APPROVAL_TOPIC";
 	
 
 	@Bean
@@ -71,18 +71,18 @@ public class AppConfig {
 	}
 
 
-//	@Bean
-//	public DefaultMessageListenerContainer jmsContainer(ConnectionFactory connectionFactory,
-//			JmsMessageListener messageListener) {
-//		DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
-//		container.setConnectionFactory(connectionFactory);
-//		container.setDestinationName(PAYMENT_INFO_QUEUE);
-////		container.setDestinationName(EXAMPLE_TOPIC);
-////		container.setPubSubDomain(true);
-////		
-//		container.setMessageListener(messageListener);
-//		return container;
-//	}
+	@Bean
+	public DefaultMessageListenerContainer jmsContainer(ConnectionFactory connectionFactory,
+			JmsMessageListener messageListener) {
+		DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
+		container.setConnectionFactory(connectionFactory);
+		container.setDestinationName(PAYMENT_INFO_QUEUE);
+//		container.setDestinationName(EXAMPLE_TOPIC);
+//		container.setPubSubDomain(true);
+//		
+		container.setMessageListener(messageListener);
+		return container;
+	}
 	
 //	
 //	//this will allow us to consume messages from the queue, using Spring for help

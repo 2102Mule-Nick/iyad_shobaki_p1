@@ -4,17 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.dto.UserPaymentInfo;
-import com.revature.messaging.JmsMessageSender;
+//import com.revature.messaging.JmsMessageSender;
 
 @Service
 public class HandlePaymentServiceImpl implements HandlePaymentService {
 
-	private JmsMessageSender jmsMessageSender;
-	
-	@Autowired
-	public void setJmsMessageSender(JmsMessageSender jmsMessageSender) {
-		this.jmsMessageSender = jmsMessageSender;
-	}
+//	private JmsMessageSender jmsMessageSender;
+//	
+//	@Autowired
+//	public void setJmsMessageSender(JmsMessageSender jmsMessageSender) {
+//		this.jmsMessageSender = jmsMessageSender;
+//	}
 
 
 	@Override

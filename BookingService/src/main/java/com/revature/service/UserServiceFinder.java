@@ -10,19 +10,19 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.revature.dto.UserPaymentInfo;
-//import com.revature.messaging.JmsMessageSender;
+import com.revature.messaging.JmsMessageSender;
 import com.revature.pojo.Payment;
 import com.revature.pojo.User;
 
 @Service
 public class UserServiceFinder {
 	
-//	private JmsMessageSender jmsMessageSender;
-//	
-//	@Autowired
-//	public void setJmsMessageSender(JmsMessageSender jmsMessageSender) {
-//		this.jmsMessageSender = jmsMessageSender;
-//	}
+	private JmsMessageSender jmsMessageSender;
+	
+	@Autowired
+	public void setJmsMessageSender(JmsMessageSender jmsMessageSender) {
+		this.jmsMessageSender = jmsMessageSender;
+	}
 
 
 	RestTemplate restTemplate = new RestTemplate();
@@ -40,8 +40,8 @@ public class UserServiceFinder {
 				HttpMethod.GET, entity, UserPaymentInfo.class);
 		
 		// Send queue to PaymentService with payment info
-		//jmsMessageSender.sendToPaymentServiceQueue(paymentInfo.getBody());
-		//
+		jmsMessageSender.sendToPaymentServiceQueue(paymentInfo.getBody());
+		
 		return paymentInfo;
 	}
 

@@ -21,7 +21,7 @@ import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.jta.JtaTransactionManager;
 
-import com.revature.messaging.JmsMessageListener;
+//import com.revature.messaging.JmsMessageListener;
 
 import bitronix.tm.TransactionManagerServices;
 import bitronix.tm.resource.jdbc.PoolingDataSource;
@@ -84,10 +84,10 @@ public class AppConfig {
 			return connectionFactory;
 		}
 
-//		@Bean
-//		public Queue paymentInfoQueue() {
-//			return new ActiveMQQueue(PAYMENT_INFO_QUEUE);
-//		}
+		@Bean
+		public Queue paymentInfoQueue() {
+			return new ActiveMQQueue(PAYMENT_INFO_QUEUE);
+		}
 
 
 //		@Bean
@@ -114,16 +114,16 @@ public class AppConfig {
 //		}
 
 		
-		@Bean
-		public DefaultMessageListenerContainer jmsContainer(ConnectionFactory connectionFactory,
-				JmsMessageListener messageListener) {
-			DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
-			container.setConnectionFactory(connectionFactory);
-			container.setDestinationName(PAYMENT_TEST_QUEUE);
-			//container.setPubSubDomain(true);
-			container.setMessageListener(messageListener);
-			return container;
-		}
+//		@Bean
+//		public DefaultMessageListenerContainer jmsContainer(ConnectionFactory connectionFactory,
+//				JmsMessageListener messageListener) {
+//			DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
+//			container.setConnectionFactory(connectionFactory);
+//			container.setDestinationName(PAYMENT_TEST_QUEUE);
+//			//container.setPubSubDomain(true);
+//			container.setMessageListener(messageListener);
+//			return container;
+//		}
 
 		@Bean
 		public bitronix.tm.Configuration btmConfig() {
