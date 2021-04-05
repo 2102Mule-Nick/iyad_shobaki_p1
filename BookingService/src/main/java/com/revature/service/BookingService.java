@@ -3,13 +3,14 @@ package com.revature.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.revature.exception.PaymentDisapproved;
 import com.revature.pojo.Booking;
 import com.revature.ws.Hotel;
 import com.revature.ws.RoomType;
 
 public interface BookingService {
-
-	public boolean bookRoom(Booking booking);
+	
+	public boolean bookRoom(Booking booking) throws PaymentDisapproved;
 	
 	public List<Hotel> getAllHotels();
 	

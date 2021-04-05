@@ -17,8 +17,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.jta.JtaTransactionManager;
+
+import com.revature.messaging.JmsMessageListener;
 
 import bitronix.tm.TransactionManagerServices;
 import bitronix.tm.resource.jdbc.PoolingDataSource;
@@ -36,6 +39,8 @@ public class AppConfig {
 		// JMS Destinations
 		public static final String PAYMENT_INFO_QUEUE = "PAYMENT_INFO_QUEUE";
 		public static final String PAYMENT_APPROVAL_TOPIC = "PAYMENT_APPROVAL_TOPIC";
+		
+		public static final String PAYMENT_TEST_QUEUE = "PAYMENT_TEST_QUEUE";
 
 		// DataSource info
 		public static final String DATASOURCE_URL = "jdbc:postgresql://" + System.getenv("DB_URL") + ":5432/"
@@ -79,10 +84,10 @@ public class AppConfig {
 			return connectionFactory;
 		}
 
-		@Bean
-		public Queue paymentInfoQueue() {
-			return new ActiveMQQueue(PAYMENT_INFO_QUEUE);
-		}
+//		@Bean
+//		public Queue paymentInfoQueue() {
+//			return new ActiveMQQueue(PAYMENT_INFO_QUEUE);
+//		}
 
 
 //		@Bean
@@ -98,27 +103,27 @@ public class AppConfig {
 			return jmsTemplate;
 		}
 
-		
 		//this will allow us to consume messages from the queue, using Spring for help
 		// Generic
-		@Bean
-		public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(ConnectionFactory connectionFactory) {
-			DefaultJmsListenerContainerFactory container = new DefaultJmsListenerContainerFactory();
-			container.setConnectionFactory(connectionFactory);
-			return container;
-		}
-		
 //		@Bean
-//		public DefaultMessageListenerContainer jmsContainer(ConnectionFactory connectionFactory,
-//				JmsMessageListener messageListener) {
-//			DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
+//		public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(ConnectionFactory connectionFactory) {
+//			DefaultJmsListenerContainerFactory container = new DefaultJmsListenerContainerFactory();
 //			container.setConnectionFactory(connectionFactory);
-//			container.setDestinationName(EXAMPLE_TOPIC);
-//			container.setPubSubDomain(true);
-//
-//			container.setMessageListener(messageListener);
+//			//container.setPubSubDomain(true);
 //			return container;
 //		}
+
+		
+		@Bean
+		public DefaultMessageListenerContainer jmsContainer(ConnectionFactory connectionFactory,
+				JmsMessageListener messageListener) {
+			DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
+			container.setConnectionFactory(connectionFactory);
+			container.setDestinationName(PAYMENT_TEST_QUEUE);
+			//container.setPubSubDomain(true);
+			container.setMessageListener(messageListener);
+			return container;
+		}
 
 		@Bean
 		public bitronix.tm.Configuration btmConfig() {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dto.UserPaymentInfo;
+import com.revature.exception.PaymentDisapproved;
 import com.revature.pojo.Booking;
 import com.revature.pojo.Payment;
 import com.revature.pojo.User;
@@ -48,8 +49,12 @@ public class BookingController {
 		booking.setCheckIn(checkIn);
 		booking.setCheckOut(checkOut);
 
-		if (bookingService.bookRoom(booking)) {
-			return ResponseEntity.ok("Room booked successfully!");
+		try {
+			if (bookingService.bookRoom(booking)) {
+				return ResponseEntity.ok("Room booked successfully!");
+			}
+		} catch (PaymentDisapproved e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 		return ResponseEntity.badRequest().body("Something went wrong. Please try later!");
 	}

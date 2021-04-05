@@ -7,9 +7,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.dao.BookingDao;
-import com.revature.messaging.JmsMessageSender;
+import com.revature.exception.PaymentDisapproved;
+import com.revature.messaging.JmsMessageListener;
+//import com.revature.messaging.JmsMessageSender;
 import com.revature.pojo.Booking;
 import com.revature.ws.Hotel;
 import com.revature.ws.HotelWS;
@@ -28,14 +31,18 @@ public class BookingServiceImpl implements BookingService {
 		this.bookingDao = bookingDao;
 	}
 
-
+	public static String paymentStatus;
+	
 	@Override
-	public boolean bookRoom(Booking booking) {
+	@Transactional
+	public boolean bookRoom(Booking booking) throws PaymentDisapproved {
 		
-		//Send Jms message with user payment info to PaymentService 
-		
-		
-		
+		//Receive Jms message with user payment info to PaymentService 
+		String result = paymentStatus;
+		System.out.println(result);
+		if(!result.equals("Approved")) {
+			throw new PaymentDisapproved("Payment method not valid!");
+		}
 		
 		return bookingDao.bookRoom(booking);
 	}
