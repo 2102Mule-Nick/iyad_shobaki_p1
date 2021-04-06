@@ -10,17 +10,17 @@ Finally, the system will send an email to notify the hotel and the user.
 
 ## Technologies Used
 
- * Java 8, 
- * PostgreSql 11,
- * Spring Framework version 5.2.7,
- * JMS Queues,
- * JMS Topic,
- * REST,
- * SOAP,
- * JTA,
- * JDBC,
- * Log4j,
- * Apache CFX,
+ * Java 8
+ * PostgreSql 11
+ * Spring Framework version 5.2.7
+ * JMS Queues
+ * JMS Topic
+ * REST
+ * SOAP
+ * JTA
+ * JDBC
+ * Log4j
+ * Apache CFX
  * Tomcat 8.5
 
 ## Features
@@ -31,7 +31,8 @@ Finally, the system will send an email to notify the hotel and the user.
 
 ## TODO List
 
-* Send email notifiaction to the user and the hotel
+* Add NotificationService and send email notifiaction to the user and the hotel
+* Continue adding Junit testing to the whole project
 
 ## Getting Started
 

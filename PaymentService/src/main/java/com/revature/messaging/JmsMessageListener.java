@@ -15,7 +15,7 @@ import com.revature.dto.UserPaymentInfo;
 import com.revature.sevice.HandlePaymentService;
 
 @Component
-public class JmsMessageListener implements MessageListener{
+public class JmsMessageListener {// implements MessageListener{
 
 	private HandlePaymentService handlePaymentService;
 
@@ -23,40 +23,53 @@ public class JmsMessageListener implements MessageListener{
 	public void setHandlePaymentService(HandlePaymentService handlePaymentService) {
 		this.handlePaymentService = handlePaymentService;
 	}
-	
-//	@JmsListener(destination = AppConfig.PAYMENT_INFO_QUEUE)
-//	public void onBookingServiceMessage(Message message) {
-//		
+
+	@JmsListener(destination = AppConfig.PAYMENT_INFO_QUEUE)
+	public void onBookingServiceMessage(Message message) {
+
+		System.out.println("Handling Booking Service Message...");
+
+		//System.out.println(message);
+		if (message instanceof ObjectMessage) {
+
+			// System.out.println("Reach here !!!!!!!!!!!!!!!!!");
+			ObjectMessage om = (ObjectMessage) message;
+			//System.out.println(om);
+			try {
+
+				UserPaymentInfo paymentInfo = (UserPaymentInfo) om.getObject();
+				//System.out.println(paymentInfo.getEmailAddress());
+				handlePaymentService.handleUSerPaymentInfo(paymentInfo);
+//				System.out.println(paymentInfo);
+			} catch (JMSException e) {
+
+				System.out.println(e.getMessage());
+				// log -- IYAD
+			}
+		}
+	}
+
+//	@Override
+//	public void onMessage(Message message) {
 //		System.out.println("Handling Booking Service Message...");
 //		
+//		System.out.println(message);
 //		if(message instanceof ObjectMessage) {
+//			
+//			//System.out.println("Reach here !!!!!!!!!!!!!!!!!");
 //			ObjectMessage om = (ObjectMessage) message; 
+//			System.out.println(om);
 //			try {
 //				
 //				UserPaymentInfo paymentInfo = (UserPaymentInfo) om.getObject();
 //				handlePaymentService.handleUSerPaymentInfo(paymentInfo);
-//				
+//				System.out.println(paymentInfo);
 //			} catch (JMSException e) {
+//				
+//				System.out.println(e.getMessage());
 //				//log -- IYAD
 //			}
-//		}
+//		}		
 //	}
 
-	@Override
-	public void onMessage(Message message) {
-		System.out.println("Handling Booking Service Message...");
-		
-		if(message instanceof ObjectMessage) {
-			ObjectMessage om = (ObjectMessage) message; 
-			try {
-				
-				UserPaymentInfo paymentInfo = (UserPaymentInfo) om.getObject();
-				handlePaymentService.handleUSerPaymentInfo(paymentInfo);
-				
-			} catch (JMSException e) {
-				//log -- IYAD
-			}
-		}		
-	}
-	
 }

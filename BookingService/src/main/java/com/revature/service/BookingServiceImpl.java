@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.dao.BookingDao;
 import com.revature.exception.PaymentDisapproved;
+import com.revature.messaging.JmsMessageListener;
 //import com.revature.messaging.JmsMessageListener;
 //import com.revature.messaging.JmsMessageSender;
 import com.revature.pojo.Booking;
@@ -30,19 +31,26 @@ public class BookingServiceImpl implements BookingService {
 	public void setBookingDao(BookingDao bookingDao) {
 		this.bookingDao = bookingDao;
 	}
-
-	public static String paymentStatus;
+	private String paymentApproval = "waiting";
 	
+	@Override
+	public void setPaymentApproval(String paymentApproval) {
+		this.paymentApproval = paymentApproval;
+	}
+
 	@Override
 	@Transactional
 	public boolean bookRoom(Booking booking) throws PaymentDisapproved {
-		
+
 		//Receive Jms message with user payment info to PaymentService 
-		String result = paymentStatus;
-		System.out.println(result);
-		if(!result.equals("Approved")) {
+//		while(paymentApproval.equals("waiting")) {
+//			
+//		}
+		System.out.println(paymentApproval);
+		if(!paymentApproval.equals("Approved")) {
 			throw new PaymentDisapproved("Payment method not valid!");
 		}
+		setPaymentApproval("waiting");
 		
 		return bookingDao.bookRoom(booking);
 	}

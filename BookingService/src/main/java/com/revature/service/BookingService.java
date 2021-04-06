@@ -10,6 +10,8 @@ import com.revature.ws.RoomType;
 
 public interface BookingService {
 	
+	public void setPaymentApproval(String paymentApproval);
+	
 	public boolean bookRoom(Booking booking) throws PaymentDisapproved;
 	
 	public List<Hotel> getAllHotels();

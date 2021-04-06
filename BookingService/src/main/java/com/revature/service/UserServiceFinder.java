@@ -39,6 +39,7 @@ public class UserServiceFinder {
 		ResponseEntity<UserPaymentInfo> paymentInfo = restTemplate.exchange("http://localhost:8080/UserService/user",
 				HttpMethod.GET, entity, UserPaymentInfo.class);
 		
+		//System.out.println(paymentInfo);
 		// Send queue to PaymentService with payment info
 		jmsMessageSender.sendToPaymentServiceQueue(paymentInfo.getBody());
 		

@@ -1,6 +1,8 @@
 package com.revature.dto;
 
-public class UserPaymentInfo {
+import java.io.Serializable;
+
+public class UserPaymentInfo implements Serializable {
 
 	private int userId;
 	private String firstName;

@@ -2,13 +2,17 @@ package com.revature.config;
 
 import java.util.Properties;
 
+import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
+import javax.jms.JMSException;
 import javax.jms.Queue;
+import javax.jms.Session;
 import javax.sql.DataSource;
 import javax.transaction.TransactionManager;
 
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,10 +22,14 @@ import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionException;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.jta.JtaTransactionManager;
 
-//import com.revature.messaging.JmsMessageListener;
+import com.revature.messaging.JmsMessageListener;
 
 import bitronix.tm.TransactionManagerServices;
 import bitronix.tm.resource.jdbc.PoolingDataSource;
@@ -77,6 +85,10 @@ public class AppConfig {
 			connectionFactory.setClassName("org.apache.activemq.ActiveMQXAConnectionFactory");
 			connectionFactory.setUniqueName("activemq");
 			connectionFactory.setMaxPoolSize(10);
+			
+			//connectionFactory.setUser("admin");
+			//connectionFactory.setPassword("admin");
+			
 			connectionFactory.setAllowLocalTransactions(true);
 			Properties props = new Properties();
 			props.put("brokerURL", BROKER_URL);
@@ -89,14 +101,8 @@ public class AppConfig {
 			return new ActiveMQQueue(PAYMENT_INFO_QUEUE);
 		}
 
-
-//		@Bean
-//		public Topic destinationTopic() {
-//			return new ActiveMQTopic(PAYMENT_APPROVAL_TOPIC);
-//		}
-
 		@Bean
-		public JmsTemplate jmsTemplate(ConnectionFactory bitronixConnectionFactory) {
+		public JmsTemplate jmsTemplate(ConnectionFactory bitronixConnectionFactory) { //@Qualifier("bitronixConnectionFactory") ConnectionFactory bitronixConnectionFactory) {
 			JmsTemplate jmsTemplate = new JmsTemplate();
 			jmsTemplate.setConnectionFactory(bitronixConnectionFactory);
 			jmsTemplate.setReceiveTimeout(10000);
@@ -105,23 +111,29 @@ public class AppConfig {
 
 		//this will allow us to consume messages from the queue, using Spring for help
 		// Generic
-//		@Bean
-//		public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(ConnectionFactory connectionFactory) {
-//			DefaultJmsListenerContainerFactory container = new DefaultJmsListenerContainerFactory();
-//			container.setConnectionFactory(connectionFactory);
-//			//container.setPubSubDomain(true);
-//			return container;
-//		}
+		@Bean
+		public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(ConnectionFactory bitronixConnectionFactory,
+				JtaTransactionManager jtaTransactionManager) {//@Qualifier("bitronixConnectionFactory") ConnectionFactory connectionFactory) {
+			DefaultJmsListenerContainerFactory container = new DefaultJmsListenerContainerFactory();
+			container.setConnectionFactory(bitronixConnectionFactory);
+			container.setTransactionManager(jtaTransactionManager);
+			
+			//container.setSessionTransacted(true);
+			container.setPubSubDomain(true);
+			//container.setPubSubDomain(false);
+			//container.setConcurrency("1-1");
+			return container;
+		}
 
-		
+//		
 //		@Bean
-//		public DefaultMessageListenerContainer jmsContainer(ConnectionFactory connectionFactory,
-//				JmsMessageListener messageListener) {
+//		public DefaultMessageListenerContainer jmsContainer(ConnectionFactory bitronixConnectionFactory,
+//				JmsMessageListener jmsMessageListener) {
 //			DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
-//			container.setConnectionFactory(connectionFactory);
+//			container.setConnectionFactory(bitronixConnectionFactory);
 //			container.setDestinationName(PAYMENT_TEST_QUEUE);
 //			//container.setPubSubDomain(true);
-//			container.setMessageListener(messageListener);
+//			container.setMessageListener(jmsMessageListener);
 //			return container;
 //		}
 

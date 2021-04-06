@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.revature.config.AppConfig;
-//import com.revature.messaging.JmsMessageSender;
+import com.revature.messaging.JmsMessageSender;
 
 public class Driver {
 
