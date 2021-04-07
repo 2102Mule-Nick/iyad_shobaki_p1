@@ -1,0 +1,21 @@
+
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Iyad', 'Shobaki', '(629) 6437827', 'iyad@shobaki.com', '1234');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Gil', 'Labba', '(555) 9364819', 'glabba1@webs.com', '40x36L');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Laetitia', 'Humbatch', '(778) 9669653', 'lhumbatch2@people.com.cn', 'bfggKz5f72D');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Jacynth', 'Langland', '(393) 2881699', 'jlangland3@accuweather.com', '6XcFgG5gG');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Marlena', 'Kilcullen', '(674) 1507529', 'mkilcullen4@bloglovin.com', 'XbiegZVtoce');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Annecorinne', 'Poleykett', '(895) 6876783', 'apoleykett5@un.org', 'sAOxQ7');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Carmen', 'McCaghan', '(187) 9449554', 'cmccaghan6@ameblo.jp', '6VNlXnI');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Sumner', 'Kleinfeld', '(557) 7325864', 'skleinfeld7@g.co', 's4sxbl');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Isidoro', 'Rees', '(843) 1274647', 'irees8@wikia.com', 'qjeV8wPsaGT2');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Johannes', 'Archbold', '(883) 5518734', 'jarchbold9@nifty.com', 'pog13bhjUE');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Kariotta', 'Cuttler', '(411) 9066132', 'kcuttlera@archive.org', '23u24J');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Minnnie', 'Whatham', '(998) 5623490', 'mwhathamb@wisc.edu', 'Gs1T7R');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Breanne', 'Kelloch', '(840) 1021459', 'bkellochc@github.io', 'txXigg083R');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Blinny', 'Iskow', '(887) 4660302', 'biskowd@ustream.tv', 'Y7stLj1Yvz');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Aloysia', 'Duffie', '(530) 4857363', 'aduffiee@domainmarket.com', 'Sy9dJHs8');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Fergus', 'Stitcher', '(193) 2849090', 'fstitcherf@nydailynews.com', 'nOm2wKMCh7');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Shaine', 'Crowcombe', '(783) 4278926', 'scrowcombeg@scribd.com', 'R5XXCDPZJ3I');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Jules', 'Salmen', '(254) 8111367', 'jsalmenh@japanpost.jp', 'iKPRkUUO');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Lauraine', 'Bagster', '(811) 1410305', 'lbagsteri@wordpress.org', 'iusfwmtaFcs');
+insert into user_account (first_name, last_name, phone_number, email_address, user_password) values ('Gabrila', 'De la croix', '(246) 7495040', 'gdelacroixj@twitter.com', 'uq8U45xtCu5E');

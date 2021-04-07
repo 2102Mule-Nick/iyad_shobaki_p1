@@ -1,0 +1,21 @@
+
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('jcb', '3547271992417536', 322, 1);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('maestro', '502077486093057051', 433, 2);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('mastercard', '3587588978391992', 553, 3);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('mastercard', '5463349056525553', 776, 4);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('visa', '4913812160773764', 388, 5);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('americanexpress', '375524952495584', 226, 6);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('americanexpress', '374622023323800', 112, 7);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('bankcard', '5602255598052372', 211, 8);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('jcb', '3547271992417536', 796, 9);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('maestro', '502077486093057051', 552, 10);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('mastercard', '3587588978391992', 889, 11);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('mastercard', '5463349056525553', 345, 12);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('visa', '4913812160773764', 243, 13);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('americanexpress', '375524952495584', 456, 14);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('americanexpress', '374622023323800', 771, 15);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('bankcard', '5602255598052372', 098, 16);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('visa', '4913812160773764', 299, 17);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('americanexpress', '375524952495584', 451, 18);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('americanexpress', '374622023323800', 191, 19);
+insert into payment (credit_card_type, credit_card_number, security_code, user_id) values ('bankcard', '5602255598052372', 022, 20);
