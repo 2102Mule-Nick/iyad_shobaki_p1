@@ -21,7 +21,7 @@ public class HandlePaymentServiceImpl implements HandlePaymentService {
 	public void handleUSerPaymentInfo(UserPaymentInfo paymentInfo) {
 		// Send a TOPIC to BookingService and NotificationService
 		System.out.println(paymentInfo);
-		jmsMessageSender.sendPaymentApprovedOrDeclined("Approved " + paymentInfo.getUserId());
+		jmsMessageSender.sendPaymentApprovedOrDeclined("Approved " + paymentInfo.getUserId() + " " + paymentInfo.getEmailAddress());
 
 	}
 
