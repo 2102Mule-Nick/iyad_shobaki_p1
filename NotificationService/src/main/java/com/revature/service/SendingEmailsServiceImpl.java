@@ -23,6 +23,17 @@ public class SendingEmailsServiceImpl implements SendingEmailsService {
 	@Override
 	public void sendEmailToUserAndHotel(String userInfoAndStatus){//String userEmail, String hotelEmail, String status) {
 		
+		
+		String[] words = userInfoAndStatus.split(" ");
+		String status = words[0];
+		
+		if(!status.equals("Approved")) {
+			return;
+		}
+		String toUserEmail = words[2];
+		
+		System.out.println("Email has beent sent to " + toUserEmail + " successfuly!");
+	/*	
 		final String from = "xxxxx@gmail.com";   // Using Gmail SMTP
 		final String password = "xxxxx";
 		
@@ -86,6 +97,7 @@ public class SendingEmailsServiceImpl implements SendingEmailsService {
 		
 		
 		
+	 */
 	}
 
 }

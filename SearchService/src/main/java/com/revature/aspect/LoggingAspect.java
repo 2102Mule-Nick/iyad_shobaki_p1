@@ -24,17 +24,7 @@ public class LoggingAspect {
 		this.log = log;
 	}
 
-	
-	// The .. notation means "any package or subpackage", 
-	// whereas * at the end of the expression after .. means "any method in any class".
-//	
-	//@Pointcut("execution(public * *(..))") // does not work
-	
-	// Try which one will work --- IYAD
-	
-	//@Pointcut("execution(* * (..))") // does not work
-	
-	// Its working 
+	// Working fine
 //	@Pointcut("execution(* *(..)) && (within(com.revature..service..*) || "
 //			+ "within(com.revature..dao..*) || "
 //			+ "within(com.revature..ws..*))")
@@ -46,6 +36,44 @@ public class LoggingAspect {
 	public void pointcutForAllMethods() {
 		//Hook - empty to hold an annotation
 	}
+	
+	// Try Around
+	@Around("pointcutForAllMethods()")
+	public Object loggingAllAdvice(ProceedingJoinPoint pjp) throws Throwable {
+
+		log.info("Method called: "+ pjp.getSignature().getClass() + "." + pjp.getSignature().getName());
+		log.info("Real class: " + pjp.getTarget().getClass());
+		log.info("Parameters passed: " + Arrays.toString(pjp.getArgs()));
+		
+		Object result = null;
+		try {
+			
+			result = pjp.proceed();
+		} catch (Exception e) {
+			log.warn(e.getMessage());
+		}
+		
+		log.info("Values returned successfully!" + result);
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+
+	// The .. notation means "any package or subpackage", 
+	// whereas * at the end of the expression after .. means "any method in any class".
+//	
+	//@Pointcut("execution(public * *(..))") // does not work
+	
+	// Try which one will work --- IYAD
+	
+	//@Pointcut("execution(* * (..))") // does not work
+	
 
 //	// @Before("pointcutForAllMethods()")
 //	@Before("execution(public * com.revature.service.HotelServiceImpl.*(..))")
@@ -79,25 +107,5 @@ public class LoggingAspect {
 //				+ returnedValue.toString());
 //	}
 	
-	// Try Around
-	@Around("pointcutForAllMethods()")
-	public Object loggingAllAdvice(ProceedingJoinPoint pjp) throws Throwable {
-
-		log.info("Method called: "+ pjp.getSignature().getClass() + "." + pjp.getSignature().getName());
-		log.info("Real class: " + pjp.getTarget().getClass());
-		log.info("Parameters passed: " + Arrays.toString(pjp.getArgs()));
-		
-		Object result = null;
-		try {
-			
-			result = pjp.proceed();
-		} catch (Exception e) {
-			log.warn(e.getMessage());
-		}
-		
-		log.info("Values returned successfully!" );//+ result);
-		
-		return result;
-	}
 	
 }

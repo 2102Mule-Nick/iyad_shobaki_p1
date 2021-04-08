@@ -31,7 +31,7 @@ public class JmsMessageListener {
 
 			try {
 				String text = ((TextMessage) message).getText();
-				System.out.println("PaymentService send a message of: " + text);
+				//System.out.println("PaymentService send a message of: " + text);
 				//sendingEmailsService.sendEmailToUserAndHotel("userEmail", "hotelEmail",text);
 				sendingEmailsService.sendEmailToUserAndHotel(text);
 			} catch (JMSException e) {

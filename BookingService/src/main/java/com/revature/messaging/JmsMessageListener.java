@@ -19,13 +19,6 @@ import com.revature.service.BookingServiceImpl;
 @Component
 public class JmsMessageListener {// implements MessageListener{
 
-//	private BookingServiceImpl bookingServiceImpl;
-//
-//	@Autowired
-//	public void setBookingServiceImpl(BookingServiceImpl bookingServiceImpl) {
-//		this.bookingServiceImpl = bookingServiceImpl;
-//	}
-
 	private BookingService bookingService;
 	
 	
@@ -33,8 +26,6 @@ public class JmsMessageListener {// implements MessageListener{
 	public void setBookingService(BookingService bookingService) {
 		this.bookingService = bookingService;
 	}
-
-
 
 	@Transactional // (rollbackFor = Exception.class)
 	@JmsListener(destination = AppConfig.PAYMENT_APPROVAL_TOPIC)//, containerFactory = "jmsListenerContainerFactory")
@@ -45,7 +36,7 @@ public class JmsMessageListener {// implements MessageListener{
 
 			try {
 				String text = ((TextMessage) message).getText();
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! PaymentService send a message of: " + text);
+				//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! PaymentService send a message of: " + text);
 				bookingService.setPaymentApproval(text);
 			} catch (JMSException e) {
 				// log -- IYAD

@@ -48,11 +48,9 @@ public class AppConfig {
 		public static final String PAYMENT_INFO_QUEUE = "PAYMENT_INFO_QUEUE";
 		public static final String PAYMENT_APPROVAL_TOPIC = "PAYMENT_APPROVAL_TOPIC";
 		
-		public static final String PAYMENT_TEST_QUEUE = "PAYMENT_TEST_QUEUE";
-
 		// DataSource info
 		public static final String DATASOURCE_URL = "jdbc:postgresql://" + System.getenv("DB_URL") + ":5432/"
-				+ System.getenv("BOOKING_DB_TEST_NAME");
+				+ System.getenv("BOOKING_DB_NAME"); // BOOKING_DB_TEST_NAME  for testing
 		public static final String DATASOURCE_DRIVERNAME = "org.postgresql.xa.PGXADataSource";
 		public static final String DATASOURCE_USERNAME = System.getenv("DB_USERNAME");
 		public static final String DATASOURCE_PASSWORD = System.getenv("DB_PASSWORD");

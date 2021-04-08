@@ -28,6 +28,7 @@ public class JmsMessageSender {
 	}
 	
 	public void sendToPaymentServiceQueue(UserPaymentInfo paymentInfo) {
+		System.out.println("The following payment info has been sent to PaymentService (QUEUE):");
 		System.out.println(paymentInfo);
 		jmsTemplate.send(paymentInfoQueue, (s) -> s.createObjectMessage(paymentInfo));
 	}

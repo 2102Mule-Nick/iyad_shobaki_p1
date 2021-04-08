@@ -50,12 +50,12 @@ public class BookingServiceImpl implements BookingService {
 			throw new PaymentDisapproved("You have to submit your payment info first.");
 		}
 		String[] words = paymentApproval.split(" ");
-		System.out.println(words[1]);
+		//System.out.println(words[1]);
 		if(!String.valueOf(booking.getUserId()).equals(words[1])) {
 			throw new PaymentDisapproved("User Id ha been changed!");
 		}
 		
- 		System.out.println(paymentApproval);
+ 		System.out.println("PaymentService sent back the follwoing information: " + paymentApproval);
 		if(!words[0].equals("Approved")) {
 			throw new PaymentDisapproved("Payment method not valid!");
 		}

@@ -10,6 +10,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+
+
 @ComponentScan("com.revature")
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @Configuration
@@ -17,12 +19,15 @@ public class AppConfig {
 
 	@Bean
 	public Logger logger() {
+//		PropertyConfigurator.configure(getClass().getClassLoader().getResourceAsStream("src/main/resources/log4j.properties"));
+//		Logger log = Logger.getRootLogger();
+//		return log;
 		return Logger.getRootLogger();
 	}
 
 	// DataSource info
 	public static final String DATASOURCE_URL = "jdbc:postgresql://" + System.getenv("DB_URL") + ":5432/"
-			+ System.getenv("HOTEL_DB_TEST_NAME") + // Change it to HOTEL_DB_NAME for production
+			+ System.getenv("HOTEL_DB_NAME") + // HOTEL_DB_TEST_NAME for testing
 			"?";
 	public static final String DATASOURCE_DRIVERNAME = "org.postgresql.Driver";
 	public static final String DATASOURCE_USERNAME = System.getenv("DB_USERNAME");

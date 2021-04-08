@@ -57,6 +57,7 @@ public class AppConfig {
 	public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(ConnectionFactory connectionFactory) {
 		DefaultJmsListenerContainerFactory container = new DefaultJmsListenerContainerFactory();
 		container.setConnectionFactory(connectionFactory);
+		container.setPubSubDomain(true);
 		return container;
 	}
 	

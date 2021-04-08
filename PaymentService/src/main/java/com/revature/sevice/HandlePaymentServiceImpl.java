@@ -20,7 +20,7 @@ public class HandlePaymentServiceImpl implements HandlePaymentService {
 	@Override
 	public void handleUSerPaymentInfo(UserPaymentInfo paymentInfo) {
 		// Send a TOPIC to BookingService and NotificationService
-		System.out.println(paymentInfo);
+		//System.out.println(paymentInfo);
 		jmsMessageSender.sendPaymentApprovedOrDeclined("Approved " + paymentInfo.getUserId() + " " + paymentInfo.getEmailAddress());
 
 	}

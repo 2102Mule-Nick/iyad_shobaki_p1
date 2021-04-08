@@ -32,21 +32,6 @@ public class LoggingAspect {
 		//Hook - empty to hold an annotation
 	}
 	
-//	//@Before("pointcutForAllMethods()")
-//	@Before("execution(public * com.revature.service.UserServiceImpl.*(..))")
-//	public void logBeforeAllMethods(JoinPoint jp) {
-//		String methodName = jp.getSignature().getName();
-//		String argString = Arrays.toString(jp.getArgs());
-//		//String returnedValues = jp.getSignature().toString();
-//		log.info("Just called UserService " + methodName + " Method. Parameters were passed " + argString);
-//	}
-//	
-//	@AfterReturning(pointcut ="execution(public * com.revature.service.UserServiceImpl.*(..))", returning ="returnedValue")
-//	public void logAfterAllMethods(JoinPoint jp, Object returnedValue) {
-//		String methodName = jp.getSignature().getName();
-//		log.info("Returned value after calling UserService " + methodName + ". Returned value: " + returnedValue.toString());
-//	}
-	
 	@Around("pointcutForAllMethods()")
 	public Object loggingAllAdvice(ProceedingJoinPoint pjp) throws Throwable {
 
@@ -62,10 +47,28 @@ public class LoggingAspect {
 			log.warn(e.getMessage());
 		}
 		
-		log.info("Values returned successfully!" );//+ result);
+		log.info("Values returned successfully!" + result);
 		
 		return result;
 	}
 	
 	
+	
+	
+	
+	
+//	//@Before("pointcutForAllMethods()")
+//	@Before("execution(public * com.revature.service.UserServiceImpl.*(..))")
+//	public void logBeforeAllMethods(JoinPoint jp) {
+//		String methodName = jp.getSignature().getName();
+//		String argString = Arrays.toString(jp.getArgs());
+//		//String returnedValues = jp.getSignature().toString();
+//		log.info("Just called UserService " + methodName + " Method. Parameters were passed " + argString);
+//	}
+//	
+//	@AfterReturning(pointcut ="execution(public * com.revature.service.UserServiceImpl.*(..))", returning ="returnedValue")
+//	public void logAfterAllMethods(JoinPoint jp, Object returnedValue) {
+//		String methodName = jp.getSignature().getName();
+//		log.info("Returned value after calling UserService " + methodName + ". Returned value: " + returnedValue.toString());
+//	}
 }
